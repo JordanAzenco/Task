@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+          {{ encore_entry_link_tags('min.app-css') }}
+        {% endblock %}
+    </head>
+    <body>
+
+  
+        {% block body %}
+       {% block notice %}
+  {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash-{{ label }} col-5">
+                    <span class="notice">{{ message }}</span>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+                   
+
+{% endblock %}   
+            
+          
+
+         
+     {% endblock %}
+    {% block javascripts %}
+     {{ encore_entry_script_tags('min.app-js') }}
+   
+    {% endblock %}
+    </body>
+</html>

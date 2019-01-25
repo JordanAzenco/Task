@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block title %}Task Add{% endblock %}
+ {% block stylesheets %} 
+  {{ parent() }}
+ {% endblock %}
+
+
+{% block body %}
+
+
+{{ dump(taskname) }}
+{{ dump(taskdate) }}
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+   
+    {% endblock %}

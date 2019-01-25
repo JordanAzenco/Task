@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task show{% endblock %}
+ 
+ {% block stylesheets %} 
+ {{ parent() }}
+ {% endblock %}
+
+
+
+{% block body %}  
+<div class="container">
+<div class="row">
+<div class="col-6">
+    <h1 class="text-center">Liste des taches en cours</h1>
+</div>   
+<div class="col-6 d-flex justify-content-end"> 
+   <a href="{{ path('task_add') }}"><img src="{{ asset('build/images/addition-sign.png') }}"></a> 
+</div>  
+</div>    
+    
+        {% block notice %}
+          
+                {{ parent() }}
+            
+        {% endblock %}    
+    
+     
+    <div class="row">
+        {% for taskee in tasks %}
+        <div class="col-4 mt-5 contain-task">
+        <a class="controller-task update" href="{{ path('task_update',{ 'id' : taskee.id }) }}"><img  src="{{ asset('build/images/refresh-button.png') }}"></a>
+        <a class="controller-task delete" href=""><img  src="{{ asset('build/images/close.png') }}"></a>
+        <div class="col-12 task d-flex flex-column align-items-center">
+            <h2 class="text-center">{{ taskee.task }}</h2>
+            <span >{{ taskee.duedate.date }}</span>
+        </div> 
+        </div>
+        {% endfor %} 
+
+    </div>
+</div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+   
+    {% endblock %}
+
