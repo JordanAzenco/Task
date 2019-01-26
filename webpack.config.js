@@ -26,6 +26,7 @@ Encore
     //.setManifestKeyPrefix('build/')
     .addStyleEntry('min.app-css', './assets/scss/app.scss')
     .addEntry('min.app-js', './assets/js/app.js')
+    .addEntry('min.ajax_request-js', './assets/js/ajax_request.js')
     /*
      * ENTRY CONFIG
      *

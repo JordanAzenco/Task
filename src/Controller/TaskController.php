@@ -121,31 +121,49 @@ class TaskController extends AbstractController
         {
             $entityManager = $this->getDoctrine()->getManager();
             $task = $entityManager->getRepository(Task::class)->find($id);
-
+            
             $form = $this->createForm(TaskType::class, $task);
-        
+            
             $form->handleRequest($request);
-
+            
             if ($form->isSubmitted() && $form->isValid()) {
-
+                
                 $task = $form->getData();
                 $taskName = $form["task"]->getData();
-
+                
                 
                 $dueDate = $form["dueDate"]->getData();
                 $task->setTask($taskName);
                 $task->setdueDate($dueDate);
                 $entityManager->flush();
                 return $this->redirectToRoute('task_show');
-     
-         
+                
+                
             }
             
             return $this->render('task/update.html.twig', [
                 'form' => $form->createView(), 
                 ]);
+                
+            }
+            /**
+            * @Route("/task/delete/{id}", name="task_delete") 
+            */
+            public function delete(Request $request)
+            {
+                $id=$request->request->get('data');
+                $entityManager = $this->getDoctrine()->getManager();
+                $task = $entityManager->getRepository(Task::class)->find($id);
+                
+                $entityManager->remove($task);
+                $entityManager->flush();
+                return $this->redirectToRoute('task_show');
+                
+                
+            }
+            
             
         }
-            
-            
-        }
+        
+        
+        
