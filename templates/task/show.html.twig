@@ -30,7 +30,7 @@
         {% for taskee in tasks %}
         <div class="col-4 mt-5 contain-task">
         <a class="controller-task update" href="{{ path('task_update',{'id': taskee.id }) }}"><img  src="{{ asset('build/images/refresh-button.png') }}"></a>
-        <p class="controller-task delete" onclick="ajax_delete_task(e,{{taskee.id}})"><img  src="{{ asset('build/images/close.png') }}"></p>
+        <p class="controller-task delete" onclick="ajax_request.ajax_delete_task({{taskee.id}})"><img  src="{{ asset('build/images/close.png') }}"></p>
         <div class="col-12 task d-flex flex-column align-items-center">
             <h2 class="text-center">{{ taskee.task }}</h2>
             <span >{{ taskee.duedate.date }}</span>
@@ -40,6 +40,9 @@
 
     </div>
 </div>
+
+
+
 
 {% endblock %}
 {% block javascripts %}

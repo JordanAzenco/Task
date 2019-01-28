@@ -147,16 +147,19 @@ class TaskController extends AbstractController
                 
             }
             /**
-            * @Route("/task/delete/{id}", name="task_delete") 
+            * @Route("/task/delete/{id}",options={"expose"=true}, name="task_delete") 
             */
-            public function delete(Request $request)
+            public function delete(Request $request, $id)
             {
-                $id=$request->request->get('data');
+                
+                if ($request->isXmlHttpRequest()){
+                $id=$request->request->get('id');
+                }
                 $entityManager = $this->getDoctrine()->getManager();
                 $task = $entityManager->getRepository(Task::class)->find($id);
                 
                 $entityManager->remove($task);
-                $entityManager->flush();
+                $entityManager->flush(); 
                 return $this->redirectToRoute('task_show');
                 
                 

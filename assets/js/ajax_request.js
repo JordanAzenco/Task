@@ -1,21 +1,34 @@
-function ajax_delete_task(e, id){
-e.preventDefault();
-that = $(this);
-$.ajax({
-    url:'{{ path("task_delete") }}',
-    type: "POST",
-    dataType: "json",
-    data: {
-        "id": "that.id"
-    },
-    async: true,
-    success: function (data)
-    {
-        console.log(data)
-        $('div#ajax-results').html(data.output);
+const routes = require('../../public/js/fos_js_routes.json');
+const routing = require('../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js');
+    
 
-    }
-});
-return false;
-
-}
+module.exports.ajax_delete_task = function (id) {
+    
+    
+    target = $(this);
+    routing.setRoutingData(routes);
+    
+    
+    $.ajax({
+        url: routing.generate('task_delete',{ 'id': id}),
+        type: "POST",
+        dataType: "json",
+        data: {
+            "id": id
+        },
+       
+        success: function (data)
+        {
+            alert(data);
+            target.remove();
+           
+            
+        },
+        error : function(resultat, statut, erreur, request){
+            
+        }
+    });
+    return false;
+    
+    
+};

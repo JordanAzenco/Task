@@ -13,7 +13,7 @@ require('../css/app.css'); */
 const PlusPath = require('../images/addition-sign.png');
 const ClosePath = require('../images/close.png');
 const UpdatePath = require('../images/refresh-button.png');
-
+ajax_request = require('./ajax_request');
 
 
 const $ = require('jquery');
@@ -26,5 +26,8 @@ require('bootstrap');
 // require('bootstrap/js/dist/popover');
 
 $(document).ready(function() {
+    /* ajax_request.ajax_delete_task(10, 12); */
     $('[data-toggle="popover"]').popover();
 });
+ 
+
