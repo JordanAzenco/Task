@@ -13,9 +13,9 @@ h2 {
     font-size:2rem;
 }
 .contain-task{
-height: 150px;
-transition:450ms ease-in;
-position: relative;
+height: 200px;
+margin-bottom: 50px;
+
 .controller-task {
     position: absolute;
     top:10px;
@@ -40,30 +40,18 @@ img {
    
 }
 
+
+
+
+}
+
 .form_update {
     height: 0;
     overflow: hidden;
     transition:350ms ease-in-out;
+    
 }
 .opened {
     height: 100px;
-}
-
-}
-.removed-item {
-    animation: removed-item-animation 450ms cubic-bezier(0.55, -0.04, 0.91, 0.94) forwards;
-    transform-origin: 0% 100%;
-    position: absolute;
-}
-@keyframes removed-item-animation {
-    0% {
-        opacity: 1;
-        transform: rotateZ(0);
-        
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateY(600px) rotateZ(90deg);
-    }
+    
 }

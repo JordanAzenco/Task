@@ -27,9 +27,16 @@
        
      {% endblock %}
     {% block javascripts %}
-     {{ encore_entry_script_tags('min.app-js') }}
+     
      {#  {{ encore_entry_script_tags('min.ajax_request-js') }} #}
    
+   
+
+{{ encore_entry_script_tags('min.app-js') }}
+{# {{ encore_entry_script_tags('min.masonry-js') }} #}
+
+ 
+
     {% endblock %}
     </body>
 </html>

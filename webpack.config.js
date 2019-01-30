@@ -26,6 +26,7 @@ Encore
     //.setManifestKeyPrefix('build/')
     .addStyleEntry('min.app-css', './assets/scss/app.scss')
     .addEntry('min.app-js', './assets/js/app.js')
+    /* .addEntry('min.masonry-js', './node_modules/masonry-layout') */
    /*  .addEntry('min.ajax_request-js', './assets/js/ajax_request.js') */
     /*
      * ENTRY CONFIG
@@ -37,6 +38,7 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .autoProvidejQuery()
+    
     // processes files ending in .scss or .sass
     .enableSassLoader()
 

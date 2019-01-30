@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Entity;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
 /**
- * 
+ * @ORM\Table(name="task")
  * @ORM\Entity(repositoryClass="App\Repository\TaskRepository")
  */
 class Task
@@ -22,10 +22,9 @@ class Task
     private $id;
 
 
-    /**
-     * @Assert\NotBlank
-     */
+    
       /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255, name="TaskName")
      */
     public $task;
@@ -33,12 +32,10 @@ class Task
 
 
     
-    /**
-     * @Assert\NotBlank
-     * @Assert\Type("\DateTime")
-     */
+   
 
      /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="datetime", name="TaskDate")
      */
     public $dueDate;
