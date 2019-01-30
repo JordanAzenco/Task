@@ -26,15 +26,21 @@
         {% endblock %}    
     
      
-    <div class="row">
+    <div class="row grid">
         {% for taskee in tasks %}
-        <div class="col-4 mt-5 contain-task">
-        <a class="controller-task update" href="{{ path('task_update',{'id': taskee.id }) }}"><img  src="{{ asset('build/images/refresh-button.png') }}"></a>
+        <div id="task_id_{{taskee.id}}" class="grid-item col-4 mt-5 contain-task">
+        <p class="controller-task update" onclick="ajax_request.open_form_task({{taskee.id}})"><img  src="{{ asset('build/images/refresh-button.png') }}"></p>
         <p class="controller-task delete" onclick="ajax_request.ajax_delete_task({{taskee.id}})"><img  src="{{ asset('build/images/close.png') }}"></p>
         <div class="col-12 task d-flex flex-column align-items-center">
-            <h2 class="text-center">{{ taskee.task }}</h2>
-            <span >{{ taskee.duedate.date }}</span>
+            <h2 id="taskeName_container_{{taskee.id}}" class="text-center">{{ taskee.task }}</h2>
+            <span id="taskeDueDate_container_{{taskee.id}}">{{ taskee.duedate.date }}</span>
         </div> 
+        
+        <div id="form_update_{{taskee.id}}" class="col-12 form_update">
+        <input type="text" id="taskName_{{taskee.id}}" name="task[task]_{{taskee.id}}" required="required" maxlenght="20" class="listTask" placeholder="Nom de la tache">
+        <input type="date" id="taskDueDate_{{taskee.id}}" name="task[dueDate]_{{taskee.id}}" required="required" value="2019-01-30">
+        <button type="submit" id="task_update_btn_{{taskee.id}}" name="task[save]_{{taskee.id}}" onclick="ajax_request.ajax_update_task({{taskee.id}})">Update Task</button>
+        </div>
         </div>
         {% endfor %} 
 

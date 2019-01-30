@@ -13,6 +13,7 @@ require('../css/app.css'); */
 const PlusPath = require('../images/addition-sign.png');
 const ClosePath = require('../images/close.png');
 const UpdatePath = require('../images/refresh-button.png');
+
 ajax_request = require('./ajax_request');
 
 
@@ -20,14 +21,13 @@ const $ = require('jquery');
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
 require('bootstrap');
-
+/* mansonry = require('./mansonry'); */
 // or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');
 // require('bootstrap/js/dist/popover');
 
 $(document).ready(function() {
-    /* ajax_request.ajax_delete_task(10, 12); */
-    $('[data-toggle="popover"]').popover();
+    
 });
  
 
