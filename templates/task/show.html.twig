@@ -34,7 +34,7 @@
      
     <div class="row grid">
         {% for taskee in tasks %}
-        <div id="task_id_{{taskee.id}}" class="grid-item col-4 mt-5 contain-task">
+        <div id="task_id_{{taskee.id}}" class="grid-item col-12 col-sm-12 col-md-4 mt-5 contain-task">
         <p class="controller-task update" onclick="ajax_request.open_form_update_task({{taskee.id}})"><img  src="{{ asset('build/images/refresh-button.png') }}"></p>
         <p class="controller-task delete" onclick="ajax_request.ajax_delete_task({{taskee.id}})"><img  src="{{ asset('build/images/close.png') }}"></p>
         <div class="col-12 task d-flex flex-column align-items-center">

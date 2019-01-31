@@ -2,24 +2,24 @@
 
 namespace App\Controller;
 
-use App\Entity\Task;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Asset\Package;
-use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 
 
-class TaskController extends AbstractController
-{  /**
-    * Matches /
+
+class UserController extends AbstractController
+{  
+    
+    /**
+    *  
     *
-   * @Route("/task/create",options={"expose"=true}, name="task_create") 
+   * @Route("/create", name="user_create") 
     */
-    public function new(Request $request)
+    public function create(Request $request)
     {
         if ($request->isXmlHttpRequest()){
            
@@ -28,33 +28,30 @@ class TaskController extends AbstractController
                 true
             );
         }
-        $package = new Package(new EmptyVersionStrategy());
+       
 
-        $path_close =  $package->getUrl('build/images/close.png');
-        $path_update = $package->getUrl('build/images/refresh-button.png');
         $entityManager = $this->getDoctrine()->getManager();
-        $task = new Task();
-        $data['close'] = $path_close;
-        $data['update'] =  $path_update;
+        $user = new User();
+        
 
-        $taskName = $data["taskname"];
-        $taskDueDate = $data["taskDueDate"]; 
+        $userName = $data["userName"];
+        $UserEmail = $date["userEmail"];
+        $usePassword = $date["userPassword"];
+        
 
-        $task->setTask($taskName);
-        $taskDueDate = new \DateTime($taskDueDate);
-        $taskDueDate->format('d-m-Y');
-        $task->setDueDate($taskDueDate);
+        $user->setName($userName);
+        $user->setEmail($UserEmail);
+        $user->setPassword($usePassword);
+
+        
         // creates a task and gives it some dummy data for this example
       
-        $entityManager->persist($task);
+        $entityManager->persist($user);
         $entityManager->flush();
-        $lastId = $task->getId();
+        $lastId = $user->getId();
         $data["id"] = $lastId;
 
-        $this->addFlash(
-            'notice',
-            'La tâche a bien été créée'
-        );
+       
         return new JsonResponse($data);
         
         }
@@ -62,22 +59,26 @@ class TaskController extends AbstractController
         
         
         /**
-        * @Route("/task/show",options={"expose"=true}, name="task_show")
+         * Matches /
+        * @Route("/", name="user_log")
         */
-        public function show(){
+        public function log(Request $request){
 
-            $task = $this->getDoctrine()
-            ->getRepository(Task::class)
-            ->findAllOrderByDescAndId(1);
-            
-            if(!$task){
-                $this->addFlash(
-                    'notice',
-                    'Il n\'y a aucune tâche en cours'
+            if ($request->isXmlHttpRequest()){
+           
+                $data = json_decode(
+                    $request->getContent(),
+                    true
                 );
-            }
-         
-            return $this->render('task/show.html.twig', ['tasks' => $task]);
+            
+            $userName = $data["userName"];
+            $userPassword = $data["userPassword"];
+            $task = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($userName);
+        }
+            return $this->render('user/con_inscr.html.twig');
+       
             
             
             

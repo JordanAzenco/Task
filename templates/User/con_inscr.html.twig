@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task show{% endblock %}
+ 
+ {% block stylesheets %} 
+ {{ parent() }}
+ {% endblock %}
+
+
+
+{% block body %}  
+<div class="container">
+<div class="row">
+
+<div class="col-12 d-flex justify-content-center">
+<h1> Stock your task </h1>
+</div>
+  <div class="col-6 form-log d-flex flex-column align-items-center justify-content-between">
+    <h2>Connexion</h2>
+        <input type="text" id="LogName" name="userName" required="required" maxlenght="20"  class="" placeholder="Votre nom">
+        <input type="password" id="logPassword" name="userPassword" required="required" class="" maxlenght="20"  placeholder="Votre password">
+        <button type="submit" id="user_log_btn" name="user_log_btn" onclick="">Connectez vous</button>
+  
+  </div>
+  <div class="col-6 form-log d-flex flex-column align-items-center justify-content-between">
+    <h2>Inscription</h2>
+        <input type="text" id="userName" name="userNameInsc" required="required" maxlenght="20" class="" placeholder="Votre nom">
+        <input type="text" id="userEmail" name="userEmailInsc" required="required" maxlenght="20" class="" placeholder="Nom de la tache">
+        <input type="password" id="userPassword" name="userPasswordInsc" required="required" maxlenght="20" class="" placeholder="Votre password">
+        <input type="password" id="userPlainPassword" name="userPlainPasswordInsc" required="required" maxlenght="20" class="listTask" placeholder="Recopiez votre password">
+        
+        <button type="submit" id="user_insc_btn" name="user_insc_btn" onclick="">Inscrivez vous</button>
+   
+</div>    
+</div>
+</div>
+    
+        {% block notice %}
+          
+                {{ parent() }}
+            
+        {% endblock %}    
+    
+     
+   
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    {% endblock %}
+
