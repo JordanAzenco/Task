@@ -4,14 +4,18 @@ const routing = require('../../vendor/friendsofsymfony/jsrouting-bundle/Resource
 routing.setRoutingData(routes);
 
 module.exports.ajax_delete_task = function (id) {
+
+    
+
     if (confirm('Etes vous sûr de vouloir supprimer la tâche ?')){
+        let token = document.getElementById('crypt_token').value;
         $.ajax({
             
             url: routing.generate('task_delete'),
             type: "POST",
             dataType: "json",   
             async : true,
-            data: JSON.stringify(id),
+            data: JSON.stringify({id, token}),
             
             success: function (id)
             {
@@ -48,7 +52,7 @@ module.exports.open_form_update_task = function (id) {
 module.exports.ajax_update_task = function (id) {
     
     if (confirm('Etes vous sûr de vouloir mettre à jour la tâche ?')){
-        
+        let token = document.getElementById('crypt_token').value;
         let taskname = document.getElementById(`taskName_${id}`).value;
         let taskDueDate = document.getElementById(`taskDueDate_${id}`).value;   
         
@@ -59,10 +63,12 @@ module.exports.ajax_update_task = function (id) {
             type: "POST",
             dataType: "json",   
             async : true,
-            data: JSON.stringify({id, taskname,taskDueDate}),
+            data: JSON.stringify({id, taskname,taskDueDate,token}),
             
             success: function (data)
             {
+                $(`#taskName_${data['id']}`).val('');
+                $(`#taskDueDate_${data['id']}`).val('');
                 let taskname_container = document.getElementById(`taskeName_container_${id}`);
                 let taskDueDate_container = document.getElementById(`taskeDueDate_container_${id}`);   
                 
@@ -110,7 +116,8 @@ module.exports.ajax_create_task = function () {
         success: function (data)
         {
             
-            
+            $('#taskNameCreate').val("");
+            $('#taskDueDateCreate').val("");
             let taskname = data['taskname'];
             let taskDueDate = data['taskDueDate'];
             let id = data['id'];

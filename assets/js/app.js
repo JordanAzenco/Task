@@ -13,7 +13,7 @@ require('../css/app.css'); */
 const PlusPath = require('../images/addition-sign.png');
 const ClosePath = require('../images/close.png');
 const UpdatePath = require('../images/refresh-button.png');
-
+log_inscr = require('./log_inscr_request');
 ajax_request = require('./ajax_request');
 
 

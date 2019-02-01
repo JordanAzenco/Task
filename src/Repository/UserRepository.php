@@ -12,12 +12,47 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository
+class UserRepository extends ServiceEntityRepository 
 {
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, User::class);
     }
+
+    public function findUsername($userName)
+    {
+        
+
+
+            $qb = $this->createQueryBuilder('u')
+            ->where('u.username = :username')
+            ->setParameter('username', $userName)
+            ->getQuery(); 
+            
+
+        return $qb->execute();
+
+        // to get just one result:
+        // $product = $qb->setMaxResults(1)->getOneOrNullResult();
+    }
+
+    public function loadUserByUsername($username, $password)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.username = :username')
+            ->Andwhere('u.password = :password')
+            ->setParameter('username', $username)
+            ->setParameter('password', $password)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+
+
+
+
+
+
 
     // /**
     //  * @return User[] Returns an array of User objects

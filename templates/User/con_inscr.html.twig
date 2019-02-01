@@ -17,20 +17,25 @@
 </div>
   <div class="col-6 form-log d-flex flex-column align-items-center justify-content-between">
     <h2>Connexion</h2>
-        <input type="text" id="LogName" name="userName" required="required" maxlenght="20"  class="" placeholder="Votre nom">
+        <input type="text" id="logName" name="userName" required="required" maxlenght="20"  class="" placeholder="Votre nom">
         <input type="password" id="logPassword" name="userPassword" required="required" class="" maxlenght="20"  placeholder="Votre password">
-        <button type="submit" id="user_log_btn" name="user_log_btn" onclick="">Connectez vous</button>
+          <input type="hidden" name="_csrf_token" id="crypt_token"
+           value="{{ csrf_token('authenticate') }}">
+        <button type="submit" id="user_log_btn" name="user_log_btn" onclick="log_inscr.ajax_log()">Connectez vous</button>
   
   </div>
   <div class="col-6 form-log d-flex flex-column align-items-center justify-content-between">
     <h2>Inscription</h2>
         <input type="text" id="userName" name="userNameInsc" required="required" maxlenght="20" class="" placeholder="Votre nom">
-        <input type="text" id="userEmail" name="userEmailInsc" required="required" maxlenght="20" class="" placeholder="Nom de la tache">
+        <input type="email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" id="userEmail" name="userEmailInsc" required="required" maxlenght="20" class="" placeholder="Votre email">
         <input type="password" id="userPassword" name="userPasswordInsc" required="required" maxlenght="20" class="" placeholder="Votre password">
         <input type="password" id="userPlainPassword" name="userPlainPasswordInsc" required="required" maxlenght="20" class="listTask" placeholder="Recopiez votre password">
-        
-        <button type="submit" id="user_insc_btn" name="user_insc_btn" onclick="">Inscrivez vous</button>
-   
+         <input type="hidden" name="_csrf_token" id="crypt_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+        <button type="submit" id="user_insc_btn" name="user_insc_btn" onclick="log_inscr.ajax_inscription();">Inscrivez vous</button>
+        <div id="error_inscr">
+        </div>
 </div>    
 </div>
 </div>

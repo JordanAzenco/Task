@@ -3,16 +3,17 @@ const routing = require('../../vendor/friendsofsymfony/jsrouting-bundle/Resource
 
 routing.setRoutingData(routes);
 
-module.exports.ajax_inscription = function (id) {
+module.exports.ajax_inscription = function() {
    
     let userName = document.getElementById('userName').value;
     let userEmail = document.getElementById('userEmail').value;
     let userPassword = document.getElementById('userPassword').value;
     let userPlainPassword = document.getElementById('userPlainPassword').value;
-
+    let token = document.getElementById('crypt_token').value;  
+    
     if(userPassword !== userPlainPassword) {
         alert("erreur password");
-    }
+    }else{
 
         $.ajax({
             
@@ -20,12 +21,22 @@ module.exports.ajax_inscription = function (id) {
             type: "POST",
             dataType: "json",   
             async : true,
-            data: JSON.stringify({userName,userEmail,userPassword}),
+            data: JSON.stringify({userName,userEmail,userPassword,token}),
             
-            success: function (id)
+            success: function (data)
             {
+             ;
+                $("#userName").val("");
+                $("#userEmail").val("");
+                $("#userPassword").val("");
+                $("#userPlainPassword").val("");
+
                 
-               // say ok to inscription and ask people to log in
+                let error_inscr = document.getElementById('error_inscr');
+               
+                    error_inscr.innerHTML= `<p>${data}</p>`;
+                
+             
                 
             },
             error : function(XMLHttpRequest, textStatus, errorThrown){
@@ -33,7 +44,7 @@ module.exports.ajax_inscription = function (id) {
             }
         });
         return false;
-        
+    }
     
 };
 
@@ -41,17 +52,18 @@ module.exports.ajax_inscription = function (id) {
 
 
 module.exports.ajax_log = function () {
-    let userName = document.getElementById('userName').value;
-    let userPassword = document.getElementById('userPassword').value;   
-    
+
+    let userName = document.getElementById('logName').value;
+    let userPassword = document.getElementById('logPassword').value;   
+    let token = document.getElementById('crypt_token').value;  
     
     $.ajax({
         
-        url: routing.generate('user_log'),
+        url: routing.generate('user_login'),
         type: "POST",
         dataType: "json",   
         async : true,
-        data: JSON.stringify({userName,userPassword}),
+        data: JSON.stringify({userName,userPassword,token}),
         
         success: function (data)
         {
@@ -61,6 +73,7 @@ module.exports.ajax_log = function () {
         },
         error : function(XMLHttpRequest, textStatus, errorThrown){
             alert('Error : ' + errorThrown);
+            
         }
     });
     return false;

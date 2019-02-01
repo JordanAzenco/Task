@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @UniqueEntity(fields="email", message="Email already taken")
  * @UniqueEntity(fields="name", message="Username already taken")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -28,7 +28,7 @@ class User
      * @ORM\Column(type="string", length=20, unique=true)
      * @Assert\NotBlank()
      */
-    private $name;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -55,14 +55,14 @@ class User
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getUserName(): ?string
     {
-        return $this->name;
+        return $this->username;
     }
 
-    public function setName(string $name): self
+    public function setUserName(string $username): self
     {
-        $this->name = $name;
+        $this->username = $username;
 
         return $this;
     }
